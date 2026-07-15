@@ -1,0 +1,20 @@
+name: footballETL
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.12
+  - pandas
+  - numpy
+  - matplotlib
+  - requests
+  - jupyter
+  - ipykernel
+  - pip
+  - python-dotenv
+  - loguru
+  - sqlalchemy
+  - pyarrow
+  - openpyxl
