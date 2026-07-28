@@ -10,3 +10,5 @@
 - Data Warehouse(Gold)
 - Data Marts
 - Power Bi
+
+## Project Status: 🚧 Currently under active development.
