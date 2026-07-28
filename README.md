@@ -11,4 +11,4 @@
 - Data Marts
 - Power Bi
 
-## Project Status: 🚧 Currently under active development.
+## Project Status: 🚧 Currently under active development
