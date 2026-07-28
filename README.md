@@ -9,6 +9,6 @@
 - Staging(Silver)
 - Data Warehouse(Gold)
 - Data Marts
-- Power Bi
+- Power BI
 
 ## Project Status: 🚧 Currently under active development
