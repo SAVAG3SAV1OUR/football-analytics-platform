@@ -18,3 +18,4 @@ dependencies:
   - sqlalchemy
   - pyarrow
   - openpyxl
+  - duckdb

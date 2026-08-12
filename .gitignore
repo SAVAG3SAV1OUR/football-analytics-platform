@@ -55,6 +55,10 @@ cover/
 *.mo
 *.pot
 
+#DuckDB
+*.duckdb
+*.duckdb.wal
+
 # Django stuff:
 *.log
 local_settings.py

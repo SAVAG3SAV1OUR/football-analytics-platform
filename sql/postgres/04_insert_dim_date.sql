@@ -1,0 +1,18 @@
+INSERT INTO warehouse.dim_date
+SELECT
+    CAST(TO_CHAR(date_value, 'YYYYMMDD') AS INTEGER) AS date_key,
+    date_value AS full_date,
+    EXTRACT(YEAR FROM date_value) AS year,
+    EXTRACT(QUARTER FROM date_value) AS quarter,
+    EXTRACT(MONTH FROM date_value) AS month,
+    TRIM(TO_CHAR(date_value, 'Month')) AS month_name,
+    EXTRACT(DAY FROM date_value) AS day,
+    EXTRACT(DOW FROM date_value) AS day_of_the_week,
+    TRIM(TO_CHAR(date_value, 'Day')) AS day_name,
+    EXTRACT(WEEK FROM date_value) AS week_of_year,
+    EXTRACT(DOW FROM date_value) IN (0,6) AS is_weekend
+FROM generate_series(
+    DATE '2000-01-01',
+    DATE '2035-12-31',
+    INTERVAL '1 day'
+) AS t(date_value);
