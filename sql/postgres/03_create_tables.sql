@@ -31,7 +31,7 @@ CREATE TABLE warehouse.dim_season(
 
 -- DimDate
 CREATE TABLE warehouse.dim_date(
-    date_key SMALLINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    date_key INTEGER PRIMARY KEY,
     full_date DATE NOT NULL UNIQUE,
     year INTEGER,
     quarter INTEGER,
@@ -46,7 +46,7 @@ CREATE TABLE warehouse.dim_date(
 
 -- DimTeam
 CREATE TABLE warehouse.dim_team(
-    team_key SMALLINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    team_key INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     team_id INTEGER NOT NULL UNIQUE,
     team_name VARCHAR(50),
     short_name VARCHAR(15),
@@ -60,7 +60,7 @@ CREATE TABLE warehouse.dim_team(
 
 -- DimVenue
 CREATE TABLE warehouse.dim_venue(
-    venue_key SMALLINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    venue_key INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     venue_id INTEGER NOT NULL UNIQUE,
     venue_name VARCHAR(100),
     city VARCHAR(100),

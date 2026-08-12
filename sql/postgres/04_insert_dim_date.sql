@@ -1,6 +1,6 @@
 INSERT INTO warehouse.dim_date
 SELECT
-    CAST(TO_CHAR(date_value, '%Y%m%d') AS INTEGER) AS date_key,
+    CAST(TO_CHAR(date_value, 'YYYYMMDD') AS INTEGER) AS date_key,
     date_value AS full_date,
     EXTRACT(YEAR FROM date_value) AS year,
     EXTRACT(QUARTER FROM date_value) AS quarter,
