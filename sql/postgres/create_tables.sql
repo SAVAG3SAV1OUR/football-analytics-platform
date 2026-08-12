@@ -22,7 +22,7 @@ CREATE TABLE warehouse.dim_season(
     season_name VARCHAR(30),
     season_start_date DATE,
     season_end_date DATE,
-    number_of_competitors SMALLINT
+    number_of_competitors SMALLINT,
 
     CONSTRAINT fk_season_competition
         FOREIGN KEY (comp_key)
@@ -69,3 +69,55 @@ CREATE TABLE warehouse.dim_venue(
     latitude NUMERIC(9,6),
     longitude NUMERIC(9,6)
 );
+
+--FactMatch
+CREATE TABLE warehouse.fact_match(
+    match_key INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    match_id INTEGER NOT NULL UNIQUE,
+    date_key SMALLINT NOT NULL,
+    comp_key INTEGER,
+    season_key INTEGER,
+    home_team_key INTEGER,
+    away_team_key INTEGER,
+    venue_key SMALLINT,
+    match_start_time TIME,
+    round_num SMALLINT,
+    round_name VARCHAR(50),
+    round_slug VARCHAR(50),
+    cup_round_type VARCHAR(50),
+    home_score SMALLINT,
+    away_score SMALLINT,
+    home_normal_time_goals SMALLINT,
+    away_normal_time_goals SMALLINT,
+    home_first_half_goals SMALLINT,
+    away_first_half_goals SMALLINT,
+    home_second_half_goals SMALLINT,
+    away_second_half_goals SMALLINT,
+    home_extra_time_goals SMALLINT,
+    away_extra_time_goals SMALLINT,
+    home_penalty_goals SMALLINT,
+    away_penalty_goals SMALLINT,
+    winner_code SMALLINT,
+
+    CONSTRAINT fk_match_date
+        FOREIGN KEY (date_key)
+        REFERENCES warehouse.dim_date(date_key),
+    CONSTRAINT fk_match_comp
+        FOREIGN KEY (comp_key)
+        REFERENCES warehouse.dim_competition(comp_key),
+    CONSTRAINT fk_match_season
+        FOREIGN KEY (season_key)
+        REFERENCES warehouse.dim_season(season_key),
+    CONSTRAINT fk_home_team
+        FOREIGN KEY (home_team_key)
+        REFERENCES warehouse.dim_team(team_key),
+    CONSTRAINT fk_away_team
+        FOREIGN KEY (away_team_key)
+        REFERENCES warehouse.dim_team(team_key),
+    CONSTRAINT fk_match_venue
+        FOREIGN KEY (venue_key)
+        REFERENCES warehouse.dim_venue(venue_key)
+
+);
+
+COMMIT;
