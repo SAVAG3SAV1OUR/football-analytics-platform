@@ -3,14 +3,14 @@ BEGIN;
 -- DimCompetition
 CREATE TABLE warehouse.dim_competition(
     comp_key INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    comp_id INTEGER NOT NULL,
+    comp_id INTEGER NOT NULL UNIQUE,
     comp_name VARCHAR(60),
     country VARCHAR(40),
     tier SMALLINT,
     has_rounds BOOLEAN,
     has_groups BOOLEAN,
     has_playoff_series BOOLEAN,
-    logo VARCHAR(100)
+    logo_id INTEGER
 );
 
 -- DimSeason
