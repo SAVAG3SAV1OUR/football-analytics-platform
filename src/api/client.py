@@ -1,7 +1,7 @@
 import requests
 import os
 from dotenv import load_dotenv
-from utils.logger import setup_logging
+from src.utils.logger import setup_logging
 import logging
 
 load_dotenv()
@@ -20,6 +20,7 @@ def get_data(url):
     response = requests.get(
         f"{BASE_URL}/{url}", 
         headers=HEADERS,
+
         timeout=30
     )
 
