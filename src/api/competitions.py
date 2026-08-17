@@ -1,5 +1,6 @@
 from src.api.client import get_data
 from src.utils.logger import setup_logging
+from src.utils.file_handler import save_raw_comps, load_raw_comps, save_league_data, load_league_data
 import logging
 
 LEAGUES = "leagues"
@@ -9,9 +10,16 @@ logger = logging.getLogger(__name__)
 
 #Getting tournament ids...
 def discover_comps():
-    leagues_info = get_data(LEAGUES)
-
+    leagues_info = load_league_data()
     competitions = []
+
+    if leagues_info is not None:
+        logger.info("Using cached data for league data")
+    else:
+        logger.info("No cached league data found")
+        leagues_info = get_data(LEAGUES)
+        save_league_data(leagues_info)
+
 
     for country in leagues_info.get("countries",[]):
         for league in country.get("leagues", []):
@@ -23,12 +31,22 @@ def discover_comps():
                 "category": league.get("categoryId")
             })
 
+
     return competitions
 
 def get_comp_details(comp_id):
     endpoint = f"tournament/{comp_id}/info"
 
-    return get_data(endpoint)
+    cached_data = load_raw_comps(comp_id)
+
+    if cached_data is not None:
+        logger.info(f"Using cached data for competition: {comp_id}")
+        return cached_data
+
+    details = get_data(endpoint)
+    save_raw_comps(comp_id, details)
+
+    return details
 
 def normalize_comp(details):
     comp = details["data"]["uniqueTournament"]
