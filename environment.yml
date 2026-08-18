@@ -19,3 +19,5 @@ dependencies:
   - pyarrow
   - openpyxl
   - duckdb
+  - pip
+    - psycopg2-binary
