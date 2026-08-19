@@ -6,6 +6,7 @@ import logging
 setup_logging()
 logger = logging.getLogger(__name__)
 
+#Load a single competition (Testing)
 def load_comps(competition):
     query = text("""
         INSERT INTO warehouse.dim_competition (
@@ -45,3 +46,34 @@ def load_comps(competition):
     logger.info(
         f"Loaded competition: {competition["comp_name"]} (ID: {competition["comp_id"]})"
     )    
+
+
+def load_all_competitions(competitions):
+    successful = 0
+    failed = 0
+
+    failed_list = []
+
+    for competition in competitions:
+            try:
+                comp_id = competition["comp_id"]
+                comp_name = competition["comp_name"]
+
+                load_comps(competition)
+
+                logger.info(f"{comp_name} with ID({comp_id}) loaded successfully")
+                successful +=1
+            except Exception as e:
+                logger.error(f"{comp_name} with ID({comp_id}) failed to load: {e}")
+                failed_list.append({
+                    "comp_id": comp_id,
+                    "comp_name": comp_name,
+                    "error": str(e)
+                })
+                failed +=1
+
+    logger.info("Competition loading complete")
+    logger.info(f"Successful: {successful}")
+    logger.info(f"Failed: {failed}")
+
+    return failed_list
