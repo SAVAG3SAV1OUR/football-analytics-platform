@@ -14,6 +14,7 @@ def discover_comps():
     leagues_info = load_league_data()
     competitions = []
 
+    logger.info("==========================================================================")
     if leagues_info is not None:
         logger.info("Using cached data for league data")
     else:
@@ -51,7 +52,7 @@ def get_comp_details(comp_id):
     return details
 
 
-def normalize_comp(details):
+"""def normalize_comp(details):
     comp = details["data"]["uniqueTournament"]
 
     return {
@@ -68,7 +69,7 @@ def normalize_comp(details):
 def get_comps(comp_id):
     details = get_comp_details(comp_id)
 
-    return normalize_comp(details)
+    return normalize_comp(details)"""
 
 #Collect all the competitions
 def collect_comps_details(limit=None):
@@ -79,7 +80,7 @@ def collect_comps_details(limit=None):
 
     failed_comps = []    
     results = []
-
+    logger.info("=======================================================================")
     logger.info(f"Starting collection for {len(comps)} competitions...")
 
     for competition in comps:
@@ -96,9 +97,8 @@ def collect_comps_details(limit=None):
         else:
             try:
                 details = get_comp_details(comp_id)
-                normalized = normalize_comp(details)
 
-                results.append(normalized)
+                results.append(details)
 
                 logger.info(f"Successfully processed competition: {comp_id}")
             except Exception as e:

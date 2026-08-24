@@ -1,4 +1,5 @@
 import json
+import pandas as pd
 from src.config import RAW_COMPS_DIR, DISCOVERY_DIR
 
 def save_raw_comps(comp_id, data):
@@ -34,3 +35,16 @@ def load_league_data():
 
     with open(file_path, 'r', encoding='utf-8') as f:
         return json.load(f)
+
+def save_to_parquet(df, file_path):
+    file_path.parent.mkdir(parents=True, exist_ok=True)
+
+    df.to_parquet(file_path)
+
+    return file_path
+
+def load_from_parquet(file_path):
+    if not file_path.exists():
+        return None
+
+    return pd.read_parquet(file_path)

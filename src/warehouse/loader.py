@@ -44,7 +44,7 @@ def load_comps(competition):
         conn.execute(query, competition)
 
     logger.info(
-        f"Loaded competition: {competition["comp_name"]} (ID: {competition["comp_id"]})"
+        f"{competition["comp_name"]} with ID: {competition["comp_id"]} successfully loaded."
     )    
 
 
@@ -60,8 +60,6 @@ def load_all_competitions(competitions):
                 comp_name = competition["comp_name"]
 
                 load_comps(competition)
-
-                logger.info(f"{comp_name} with ID({comp_id}) loaded successfully")
                 successful +=1
             except Exception as e:
                 logger.error(f"{comp_name} with ID({comp_id}) failed to load: {e}")
