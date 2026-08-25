@@ -17,11 +17,9 @@ CREATE TABLE warehouse.dim_competition(
 CREATE TABLE warehouse.dim_season(
     season_key INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     comp_key INTEGER NOT NULL,
-    season_id INTEGER NOT NULL,
+    season_id INTEGER NOT NULL UNIQUE,
     season_year VARCHAR(8),
     season_name VARCHAR(30),
-    season_start_date DATE,
-    season_end_date DATE,
     number_of_competitors SMALLINT,
 
     CONSTRAINT fk_season_competition
