@@ -11,8 +11,10 @@ RAW_DATA_DIR = DATA_DIR / "raw"
 SILVER_DATA_DIR = DATA_DIR / "silver"
 RAW_COMPS_DIR = RAW_DATA_DIR / "competitions"
 DISCOVERY_DIR = RAW_DATA_DIR / "discovery"
+RAW_SEASONS_DIR = RAW_DATA_DIR / "seasons"
 
 RAW_COMPS_DIR.mkdir(parents=True, exist_ok=True)
+RAW_SEASONS_DIR.mkdir(parents=True, exist_ok=True)
 DISCOVERY_DIR.mkdir(parents=True, exist_ok=True)
 SILVER_DATA_DIR.mkdir(parents=True, exist_ok=True)
 

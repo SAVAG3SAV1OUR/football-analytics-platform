@@ -1,7 +1,8 @@
 import json
 import pandas as pd
-from src.config import RAW_COMPS_DIR, DISCOVERY_DIR
+from src.config import RAW_COMPS_DIR, DISCOVERY_DIR, RAW_SEASONS_DIR
 
+"""=================Competitions=========================="""
 def save_raw_comps(comp_id, data):
     file_path = RAW_COMPS_DIR / f"{comp_id}.json"
 
@@ -36,6 +37,34 @@ def load_league_data():
     with open(file_path, 'r', encoding='utf-8') as f:
         return json.load(f)
 
+
+"""=================Seasons=========================="""
+def save_raw_seasons(comp_id,comp_name, season_id, data):
+    file_path = RAW_SEASONS_DIR / f"{comp_id} - {comp_name}" / f"{season_id}.json"
+
+    file_path.parent.mkdir(parents=True, exist_ok=True)
+    
+    with open(file_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=4)
+
+    return file_path
+
+def load_raw_seasons(comp_id,comp_name,season_id):
+    file_path = RAW_SEASONS_DIR / f"{comp_id} - {comp_name}" / f"{season_id}.json"
+
+    if not file_path.exists():
+        return None
+
+    with open(file_path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+
+
+
+
+
+"""=================Saving/loading Parquet files=========================="""
 def save_to_parquet(df, file_path):
     file_path.parent.mkdir(parents=True, exist_ok=True)
 
